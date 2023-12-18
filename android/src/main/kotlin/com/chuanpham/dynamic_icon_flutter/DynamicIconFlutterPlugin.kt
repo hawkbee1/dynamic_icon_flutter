@@ -55,9 +55,12 @@ class DynamicIconFlutterPlugin : ContextAwarePlugin() {
         for (value in activitiesArray) {
             val action = if (value == targetIcon) {
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+            Log.d("action", "ENABLED")
             } else {
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+            Log.d("action", "DISABLED")
             }
+            Log.d("action", "$packageName.$value")
             packageManager.setComponentEnabledSetting(
                     ComponentName(packageName!!, "$packageName.$value"),
                     action, PackageManager.DONT_KILL_APP
@@ -66,16 +69,16 @@ class DynamicIconFlutterPlugin : ContextAwarePlugin() {
 
         //finish current activity & launch new intent to prevent app from killing itself!
         //check if android version is greater than 8
-        if (VERSION.SDK_INT >= VERSION_CODES.O) {
-            val intent = Intent()
-            intent.setClassName(packageName!!, className.toString())
-            intent.action = Intent.ACTION_MAIN
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK
-             this.activity?.finish()
-            startActivity(this.applicationContext!!, intent, null)
-        }
+        // if (VERSION.SDK_INT >= VERSION_CODES.O) {
+        //     val intent = Intent()
+        //     intent.setClassName(packageName!!, className.toString())
+        //     intent.action = Intent.ACTION_MAIN
+        //     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        //     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+        //             Intent.FLAG_ACTIVITY_CLEAR_TASK
+        //      this.activity?.finish()
+        //     startActivity(this.applicationContext!!, intent, null)
+        // }
     }
 
 }
