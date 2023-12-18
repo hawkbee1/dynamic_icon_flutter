@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build.*
+import android.util.Log
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat.startActivity
 import io.flutter.embedding.engine.plugins.FlutterPlugin
